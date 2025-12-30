@@ -10,6 +10,7 @@ import type { Expense } from "../types/expense";
 
 interface AppState {
   expenses: Expense[];
+  temperatureUnit: "celsius" | "fahrenheit";
   currency: string;
 }
 
@@ -17,12 +18,14 @@ type AppAction =
   | { type: "ADD_EXPENSE"; payload: Expense }
   | { type: "DELETE_EXPENSE"; payload: string }
   | { type: "SET_EXPENSES"; payload: Expense[] }
+  | { type: "TOGGLE_TEMPERATURE_UNIT" }
   | { type: "SET_CURRENCY"; payload: string };
 
 interface AppContextType {
   state: AppState;
   addExpense: (expense: Omit<Expense, "id">) => void;
   deleteExpense: (id: string) => void;
+  toggleTemperatureUnit: () => void;
   setCurrency: (currency: string) => void;
 }
 
@@ -52,6 +55,7 @@ function saveToStorage(state: AppState) {
 
 const initialState: AppState = {
   expenses: [],
+  temperatureUnit: "celsius",
   currency: "USD",
   ...loadFromStorage(),
 };
@@ -67,7 +71,12 @@ function appReducer(state: AppState, action: AppAction): AppState {
       };
     case "SET_EXPENSES":
       return { ...state, expenses: action.payload };
-
+    case "TOGGLE_TEMPERATURE_UNIT":
+      return {
+        ...state,
+        temperatureUnit:
+          state.temperatureUnit === "celsius" ? "fahrenheit" : "celsius",
+      };
     case "SET_CURRENCY":
       return { ...state, currency: action.payload };
     default:
@@ -94,6 +103,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "DELETE_EXPENSE", payload: id });
   }, []);
 
+  const toggleTemperatureUnit = useCallback(() => {
+    dispatch({ type: "TOGGLE_TEMPERATURE_UNIT" });
+  }, []);
+
   const setCurrency = useCallback((currency: string) => {
     dispatch({ type: "SET_CURRENCY", payload: currency });
   }, []);
@@ -103,9 +116,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       state,
       addExpense,
       deleteExpense,
+      toggleTemperatureUnit,
       setCurrency,
     }),
-    [state, addExpense, deleteExpense, setCurrency]
+    [state, addExpense, deleteExpense, toggleTemperatureUnit, setCurrency]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
