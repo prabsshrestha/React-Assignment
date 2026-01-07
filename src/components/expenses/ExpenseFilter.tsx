@@ -31,6 +31,7 @@ export function ExpenseFilter({
           <div className="filter-input">
             <Tag size={16} />
             <select
+              className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none"
               value={category}
               onChange={(e) =>
                 onCategoryChange(e.target.value as ExpenseCategory | "all")

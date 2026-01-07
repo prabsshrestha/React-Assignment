@@ -571,7 +571,7 @@ a {
 
 .filter-input input,
 .filter-input select {
-  border: none;
+  border: none !important;
   outline: none;
   font-size: 0.85rem;
   flex: 1;
