@@ -28,7 +28,7 @@ export function ExpenseFilter({
       <div className="filter-grid">
         <div className="filter-group">
           <label>Category</label>
-          <div className="filter-input">
+          <div className="filter-input select-wrapper">
             <Tag size={16} />
             <select
               className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none"
@@ -44,6 +44,19 @@ export function ExpenseFilter({
                 </option>
               ))}
             </select>
+            <svg
+              className="select-arrow"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
           </div>
         </div>
 

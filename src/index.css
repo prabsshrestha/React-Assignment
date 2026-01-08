@@ -936,3 +936,35 @@ a {
   flex-shrink: 0;
   pointer-events: none;
 }
+
+/* select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: white;
+}
+
+.select-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.select-wrapper svg:first-child {
+  position: absolute;
+  left: 8px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.select-wrapper select {
+  padding-left: 1.5rem; 
+  padding-right: 2.5rem;
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+  color: #6b7280;
+}
