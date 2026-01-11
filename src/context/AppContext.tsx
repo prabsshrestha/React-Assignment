@@ -11,7 +11,6 @@ import type { Expense } from "../types/expense";
 interface AppState {
   expenses: Expense[];
   temperatureUnit: "celsius" | "fahrenheit";
-  currency: string;
 }
 
 type AppAction =
@@ -26,7 +25,6 @@ interface AppContextType {
   addExpense: (expense: Omit<Expense, "id">) => void;
   deleteExpense: (id: string) => void;
   toggleTemperatureUnit: () => void;
-  setCurrency: (currency: string) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -56,7 +54,6 @@ function saveToStorage(state: AppState) {
 const initialState: AppState = {
   expenses: [],
   temperatureUnit: "celsius",
-  currency: "USD",
   ...loadFromStorage(),
 };
 
@@ -77,8 +74,6 @@ function appReducer(state: AppState, action: AppAction): AppState {
         temperatureUnit:
           state.temperatureUnit === "celsius" ? "fahrenheit" : "celsius",
       };
-    case "SET_CURRENCY":
-      return { ...state, currency: action.payload };
     default:
       return state;
   }
@@ -107,19 +102,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "TOGGLE_TEMPERATURE_UNIT" });
   }, []);
 
-  const setCurrency = useCallback((currency: string) => {
-    dispatch({ type: "SET_CURRENCY", payload: currency });
-  }, []);
-
   const value = useMemo(
     () => ({
       state,
       addExpense,
       deleteExpense,
       toggleTemperatureUnit,
-      setCurrency,
     }),
-    [state, addExpense, deleteExpense, toggleTemperatureUnit, setCurrency]
+    [state, addExpense, deleteExpense, toggleTemperatureUnit]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
