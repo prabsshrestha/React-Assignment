@@ -4,10 +4,9 @@ import type { Expense } from "../../types/expense";
 
 interface ExpenseSummaryProps {
   expenses: Expense[];
-  currency: string;
 }
 
-export function ExpenseSummary({ expenses, currency }: ExpenseSummaryProps) {
+export function ExpenseSummary({ expenses }: ExpenseSummaryProps) {
   const stats = useMemo(() => {
     const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
 

@@ -5,10 +5,8 @@ import { Trash2 } from "lucide-react";
 
 const ExpenseItem = memo(function ExpenseItem({
   expense,
-  currency,
 }: {
   expense: Expense;
-  currency: string;
 }) {
   const { deleteExpense } = useApp();
   const category = EXPENSE_CATEGORIES.find((c) => c.value === expense.category);
@@ -57,7 +55,7 @@ export function ExpenseList({
   return (
     <div className="expense-list">
       {expenses.map((expense) => (
-        <ExpenseItem key={expense.id} expense={expense} currency={currency} />
+        <ExpenseItem key={expense.id} expense={expense} />
       ))}
     </div>
   );
