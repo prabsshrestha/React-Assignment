@@ -17,8 +17,7 @@ type AppAction =
   | { type: "ADD_EXPENSE"; payload: Expense }
   | { type: "DELETE_EXPENSE"; payload: string }
   | { type: "SET_EXPENSES"; payload: Expense[] }
-  | { type: "TOGGLE_TEMPERATURE_UNIT" }
-  | { type: "SET_CURRENCY"; payload: string };
+  | { type: "TOGGLE_TEMPERATURE_UNIT" };
 
 interface AppContextType {
   state: AppState;
