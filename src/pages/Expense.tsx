@@ -9,7 +9,7 @@ import { ExpenseList } from "../components/expenses/ExpenseList";
 
 export default function Expenses() {
   const { state } = useApp();
-  const { expenses, currency } = state;
+  const { expenses } = state;
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryFilter =
     (searchParams.get("category") as ExpenseCategory | "all") || "all";
@@ -63,7 +63,7 @@ export default function Expenses() {
       <div className="expenses-grid">
         {/* LEFT SIDE */}
         <div className="expenses-left">
-          <ExpenseSummary expenses={expenses} currency={currency} />
+          <ExpenseSummary expenses={expenses} />
           <ExpenseFilter
             category={categoryFilter}
             date={dateFilter}
@@ -77,7 +77,7 @@ export default function Expenses() {
               ? `All Expenses (${expenses.length})`
               : `Filtered Results (${filteredExpenses.length} of ${expenses.length})`}
           </h3>
-          <ExpenseList expenses={filteredExpenses} currency={currency} />
+          <ExpenseList expenses={filteredExpenses} />
         </div>
 
         {/* RIGHT SIDE */}
