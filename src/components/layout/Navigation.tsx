@@ -12,8 +12,8 @@ export default function Navigation() {
     <header className="navbar">
       <nav className="navbar-inner">
         <NavLink to="/" className="brand">
-          <div className="brand-icon">FW</div>
-          <span className="brand-text">FinanceWeatherHub</span>
+          <div className="brand-icon">EW</div>
+          <span className="brand-text">Expense Weather Tracker</span>
         </NavLink>
 
         <div className="nav-links">
